@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle, #1e1e2f, #0f0f1a);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 3rem;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.options {
+  margin-bottom: 20px;
+}
+
+.options button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background: #00ff99;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.options button:hover {
+  background: #00cc7a;
+}
+
+.name-input {
+  margin-bottom: 10px;
+  display: none;
+}
+
+.name-input input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 100px));
+  grid-gap: 12px;
+  perspective: 1000px;
+  padding: 0 10px;
+}
+
+.cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(145deg, #2b2b44, #1b1b2f);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.3s;
+}
+
+.cell:hover {
+  transform: rotateY(10deg) rotateX(10deg) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+.winner {
+  color: #00ff99;
+  font-size: 2rem;
+  margin-top: 30px;
+  text-shadow: 0 0 10px #00ff99;
+}
+
+button.restart {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00ff99;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button.restart:hover {
+  background: #00cc7a;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  .cell {
+    font-size: 2rem;
+  }
+  .options button, .restart, .name-input input, .name-input button {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+}
+
+/* Win Animation */
+.winning-cell {
+  animation: pulseWin 1s infinite alternate;
+  background: linear-gradient(145deg, #00ff99, #1b1b2f) !important;
+  box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
+  color: #000;
+}
+
+@keyframes pulseWin {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #00ff99;
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00ff99;
+  }
+}
