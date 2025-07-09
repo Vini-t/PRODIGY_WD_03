@@ -3,13 +3,13 @@ const winnerText = document.getElementById('winner');
 const nameInput = document.getElementById('nameInput');
 let currentPlayer = 'X';
 let cells = Array(9).fill(null);
-let playMode = ''; // 'friend' or 'computer'
+let playMode = '';
 let playerNames = { X: 'Player X', O: 'Player O' };
 
 function startGame(mode) {
   playMode = mode;
   if (mode === 'friend') {
-    nameInput.style.display = 'block';
+    nameInput.style.display = 'flex';
   } else {
     playerNames = { X: 'You', O: 'Computer' };
     restartGame();
@@ -17,10 +17,16 @@ function startGame(mode) {
 }
 
 function startFriendGame() {
-  const friendName = document.getElementById('friendName').value.trim();
-  if (friendName) playerNames.O = friendName;
-  nameInput.style.display = 'none';
-  restartGame();
+  const name1 = document.getElementById('player1Name').value.trim();
+  const name2 = document.getElementById('player2Name').value.trim();
+  if (name1 && name2) {
+    playerNames.X = name1;
+    playerNames.O = name2;
+    nameInput.style.display = 'none';
+    restartGame();
+  } else {
+    alert("Please enter both names.");
+  }
 }
 
 function createBoard() {
