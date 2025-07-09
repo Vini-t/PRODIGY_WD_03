@@ -6,7 +6,7 @@
 }
 
 body {
-  background: radial-gradient(circle, #1e1e2f, #0f0f1a);
+  position: relative;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -14,12 +14,30 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+  z-index: 1;
+}
+
+/* Animated Background */
+.animated-bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(-45deg, #1e1e2f, #3e3e9f, #1f1f4a, #111121);
+  background-size: 400% 400%;
+  animation: moveBg 12s ease infinite;
+  z-index: -1;
+}
+
+@keyframes moveBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 h1 {
   margin-bottom: 20px;
   font-size: 3rem;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 .options {
@@ -29,36 +47,62 @@ h1 {
 .options button {
   margin: 0 10px;
   padding: 10px 20px;
-  background: #00ff99;
+  background: #00ffae;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  color: #000;
+  box-shadow: 0 0 15px #00ffae;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .options button:hover {
-  background: #00cc7a;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00ffae;
 }
 
 .name-input {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .name-input input {
-  padding: 8px;
-  border-radius: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
   border: none;
   font-size: 1rem;
+  width: 200px;
+}
+
+.name-input button {
+  padding: 8px 16px;
+  background: #00ffae;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+  box-shadow: 0 0 15px #00ffae;
+  transition: all 0.3s ease;
+}
+
+.name-input button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00ffae;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, minmax(80px, 100px));
-  grid-gap: 12px;
+  gap: 15px;
   perspective: 1000px;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .cell {
@@ -72,7 +116,7 @@ h1 {
   justify-content: center;
   font-size: 2.5rem;
   cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s;
 }
 
 .cell:hover {
@@ -81,25 +125,48 @@ h1 {
 }
 
 .winner {
-  color: #00ff99;
+  color: #00ffae;
   font-size: 2rem;
   margin-top: 30px;
-  text-shadow: 0 0 10px #00ff99;
+  text-shadow: 0 0 10px #00ffae;
 }
 
 button.restart {
   margin-top: 20px;
   padding: 10px 20px;
-  background: #00ff99;
+  background: #00ffae;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  color: #000;
+  box-shadow: 0 0 15px #00ffae;
+  transition: all 0.3s ease;
 }
 
 button.restart:hover {
-  background: #00cc7a;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00ffae;
+}
+
+/* Win Animation */
+.winning-cell {
+  animation: pulseWin 1s infinite alternate;
+  background: linear-gradient(145deg, #00ffae, #1b1b2f) !important;
+  box-shadow: 0 0 20px #00ffae, 0 0 40px #00ffae;
+  color: #000;
+}
+
+@keyframes pulseWin {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #00ffae;
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00ffae;
+  }
 }
 
 /* Responsive */
@@ -111,27 +178,11 @@ button.restart:hover {
   .cell {
     font-size: 2rem;
   }
-  .options button, .restart, .name-input input, .name-input button {
+  .options button,
+  .restart,
+  .name-input input,
+  .name-input button {
     font-size: 0.9rem;
     padding: 8px 14px;
-  }
-}
-
-/* Win Animation */
-.winning-cell {
-  animation: pulseWin 1s infinite alternate;
-  background: linear-gradient(145deg, #00ff99, #1b1b2f) !important;
-  box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
-  color: #000;
-}
-
-@keyframes pulseWin {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 10px #00ff99;
-  }
-  100% {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px #00ff99;
   }
 }
